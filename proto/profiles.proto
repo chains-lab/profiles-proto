@@ -4,23 +4,27 @@ package profile;
 option go_package = "github.com/chains-lab/profiles-proto/gen/go/svc;svc";
 
 import "google/protobuf/empty.proto";
+import "common.proto";
 
 service ProfileService {
-  rpc CreateOwnProfile (CreateProfilrRequest) returns (Profile);
-  rpc GetOwnProfile   (google.protobuf.Empty) returns (Profile);
+  rpc CreateOwnProfile (CreateProfileRequest) returns (ProfileModel);
+  rpc GetOwnProfile   (google.protobuf.Empty) returns (ProfileModel);
 
-  rpc GetProfile (GetProfileRequest) returns (Profile);
-  rpc UpdateOwnProfile (UpdateOwnProfileRequest) returns (Profile);
-  rpc UpdateOwnUsername (UpdateOwnUsernameRequest) returns (Profile);
+  rpc GetProfileById (GetProfileByIdRequest) returns (ProfileModel);
+  rpc GetProfileByUsername (GetProfileByUsernameRequest) returns (ProfileModel);
+  rpc SearchProfilesByUsername (SearchProfilesByUsernameRequest) returns (ProfileModelList);
+
+  rpc UpdateOwnProfile (UpdateOwnProfileRequest) returns (ProfileModel);
+  rpc UpdateOwnUsername (UpdateOwnUsernameRequest) returns (ProfileModel);
 
   // Admin panel
-  rpc ResetProfileByAdmin (ResetProfileByAdminRequest) returns (Profile);
-  rpc ResetUsernameByAdmin (ResetUsernameByAdminRequest) returns (Profile);
-  rpc UpdateOfficialByAdmin (UpdateOfficialByAdminRequest) returns (Profile);
+  rpc ResetProfileByAdmin (ResetProfileByAdminRequest) returns (ProfileModel);
+  rpc ResetUsernameByAdmin (ResetUsernameByAdminRequest) returns (ProfileModel);
+  rpc UpdateOfficialByAdmin (UpdateOfficialByAdminRequest) returns (ProfileModel);
 }
 
 // REQUESTS
-message CreateProfilrRequest {
+message CreateProfileRequest {
   string username = 1;
   optional string pseudonym = 2;
   optional string description = 3;
@@ -29,17 +33,17 @@ message CreateProfilrRequest {
   optional string birth_date = 6; // Format: YYYY-MM-DD
 }
 
-message GetProfileRequest {
-  oneof identifier {
-    string user_id  = 1;
-    string username = 2;
-  }
+message GetProfileByIdRequest {
+  string user_id  = 1;
 }
 
-message SearchProfileRequest {
-  string query = 1;
-  int32 limit = 2;
-  int32 offset = 3;
+message GetProfileByUsernameRequest {
+  string username = 1;
+}
+
+message SearchProfilesByUsernameRequest {
+  string prompt = 1;
+  PaginationRequest pagination = 2;
 }
 
 message UpdateOwnProfileRequest {
@@ -81,7 +85,7 @@ message ResetUsernameByAdminRequest {
 
 // RESPONSES
 
-message Profile {
+message ProfileModel {
   string user_id = 1;
   string username = 2;
   optional string pseudonym = 3;
@@ -94,6 +98,7 @@ message Profile {
   string created_at = 10;
 }
 
-message ProfileList {
-  repeated Profile profiles = 1;
+message ProfileModelList {
+  repeated ProfileModel profiles = 1;
+  PaginationResponse pagination = 2;
 }

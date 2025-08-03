@@ -20,23 +20,27 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ProfileService_CreateOwnProfile_FullMethodName      = "/profile.ProfileService/CreateOwnProfile"
-	ProfileService_GetOwnProfile_FullMethodName         = "/profile.ProfileService/GetOwnProfile"
-	ProfileService_GetProfile_FullMethodName            = "/profile.ProfileService/GetProfile"
-	ProfileService_UpdateOwnProfile_FullMethodName      = "/profile.ProfileService/UpdateOwnProfile"
-	ProfileService_UpdateOwnUsername_FullMethodName     = "/profile.ProfileService/UpdateOwnUsername"
-	ProfileService_ResetProfileByAdmin_FullMethodName   = "/profile.ProfileService/ResetProfileByAdmin"
-	ProfileService_ResetUsernameByAdmin_FullMethodName  = "/profile.ProfileService/ResetUsernameByAdmin"
-	ProfileService_UpdateOfficialByAdmin_FullMethodName = "/profile.ProfileService/UpdateOfficialByAdmin"
+	ProfileService_CreateOwnProfile_FullMethodName         = "/profile.ProfileService/CreateOwnProfile"
+	ProfileService_GetOwnProfile_FullMethodName            = "/profile.ProfileService/GetOwnProfile"
+	ProfileService_GetProfileById_FullMethodName           = "/profile.ProfileService/GetProfileById"
+	ProfileService_GetProfileByUsername_FullMethodName     = "/profile.ProfileService/GetProfileByUsername"
+	ProfileService_SearchProfilesByUsername_FullMethodName = "/profile.ProfileService/SearchProfilesByUsername"
+	ProfileService_UpdateOwnProfile_FullMethodName         = "/profile.ProfileService/UpdateOwnProfile"
+	ProfileService_UpdateOwnUsername_FullMethodName        = "/profile.ProfileService/UpdateOwnUsername"
+	ProfileService_ResetProfileByAdmin_FullMethodName      = "/profile.ProfileService/ResetProfileByAdmin"
+	ProfileService_ResetUsernameByAdmin_FullMethodName     = "/profile.ProfileService/ResetUsernameByAdmin"
+	ProfileService_UpdateOfficialByAdmin_FullMethodName    = "/profile.ProfileService/UpdateOfficialByAdmin"
 )
 
 // ProfileServiceClient is the client API for ProfileService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProfileServiceClient interface {
-	CreateOwnProfile(ctx context.Context, in *CreateProfilrRequest, opts ...grpc.CallOption) (*Profile, error)
+	CreateOwnProfile(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*Profile, error)
 	GetOwnProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Profile, error)
-	GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*Profile, error)
+	GetProfileById(ctx context.Context, in *GetProfileByIdRequest, opts ...grpc.CallOption) (*Profile, error)
+	GetProfileByUsername(ctx context.Context, in *GetProfileByUsernameRequest, opts ...grpc.CallOption) (*Profile, error)
+	SearchProfilesByUsername(ctx context.Context, in *SearchProfilesByUsernameRequest, opts ...grpc.CallOption) (*ProfileList, error)
 	UpdateOwnProfile(ctx context.Context, in *UpdateOwnProfileRequest, opts ...grpc.CallOption) (*Profile, error)
 	UpdateOwnUsername(ctx context.Context, in *UpdateOwnUsernameRequest, opts ...grpc.CallOption) (*Profile, error)
 	// Admin panel
@@ -53,7 +57,7 @@ func NewProfileServiceClient(cc grpc.ClientConnInterface) ProfileServiceClient {
 	return &profileServiceClient{cc}
 }
 
-func (c *profileServiceClient) CreateOwnProfile(ctx context.Context, in *CreateProfilrRequest, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) CreateOwnProfile(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*Profile, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Profile)
 	err := c.cc.Invoke(ctx, ProfileService_CreateOwnProfile_FullMethodName, in, out, cOpts...)
@@ -73,10 +77,30 @@ func (c *profileServiceClient) GetOwnProfile(ctx context.Context, in *emptypb.Em
 	return out, nil
 }
 
-func (c *profileServiceClient) GetProfile(ctx context.Context, in *GetProfileRequest, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) GetProfileById(ctx context.Context, in *GetProfileByIdRequest, opts ...grpc.CallOption) (*Profile, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Profile)
-	err := c.cc.Invoke(ctx, ProfileService_GetProfile_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, ProfileService_GetProfileById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profileServiceClient) GetProfileByUsername(ctx context.Context, in *GetProfileByUsernameRequest, opts ...grpc.CallOption) (*Profile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Profile)
+	err := c.cc.Invoke(ctx, ProfileService_GetProfileByUsername_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profileServiceClient) SearchProfilesByUsername(ctx context.Context, in *SearchProfilesByUsernameRequest, opts ...grpc.CallOption) (*ProfileList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ProfileList)
+	err := c.cc.Invoke(ctx, ProfileService_SearchProfilesByUsername_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -137,9 +161,11 @@ func (c *profileServiceClient) UpdateOfficialByAdmin(ctx context.Context, in *Up
 // All implementations must embed UnimplementedProfileServiceServer
 // for forward compatibility.
 type ProfileServiceServer interface {
-	CreateOwnProfile(context.Context, *CreateProfilrRequest) (*Profile, error)
+	CreateOwnProfile(context.Context, *CreateProfileRequest) (*Profile, error)
 	GetOwnProfile(context.Context, *emptypb.Empty) (*Profile, error)
-	GetProfile(context.Context, *GetProfileRequest) (*Profile, error)
+	GetProfileById(context.Context, *GetProfileByIdRequest) (*Profile, error)
+	GetProfileByUsername(context.Context, *GetProfileByUsernameRequest) (*Profile, error)
+	SearchProfilesByUsername(context.Context, *SearchProfilesByUsernameRequest) (*ProfileList, error)
 	UpdateOwnProfile(context.Context, *UpdateOwnProfileRequest) (*Profile, error)
 	UpdateOwnUsername(context.Context, *UpdateOwnUsernameRequest) (*Profile, error)
 	// Admin panel
@@ -156,14 +182,20 @@ type ProfileServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedProfileServiceServer struct{}
 
-func (UnimplementedProfileServiceServer) CreateOwnProfile(context.Context, *CreateProfilrRequest) (*Profile, error) {
+func (UnimplementedProfileServiceServer) CreateOwnProfile(context.Context, *CreateProfileRequest) (*Profile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOwnProfile not implemented")
 }
 func (UnimplementedProfileServiceServer) GetOwnProfile(context.Context, *emptypb.Empty) (*Profile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOwnProfile not implemented")
 }
-func (UnimplementedProfileServiceServer) GetProfile(context.Context, *GetProfileRequest) (*Profile, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetProfile not implemented")
+func (UnimplementedProfileServiceServer) GetProfileById(context.Context, *GetProfileByIdRequest) (*Profile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProfileById not implemented")
+}
+func (UnimplementedProfileServiceServer) GetProfileByUsername(context.Context, *GetProfileByUsernameRequest) (*Profile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProfileByUsername not implemented")
+}
+func (UnimplementedProfileServiceServer) SearchProfilesByUsername(context.Context, *SearchProfilesByUsernameRequest) (*ProfileList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchProfilesByUsername not implemented")
 }
 func (UnimplementedProfileServiceServer) UpdateOwnProfile(context.Context, *UpdateOwnProfileRequest) (*Profile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOwnProfile not implemented")
@@ -202,7 +234,7 @@ func RegisterProfileServiceServer(s grpc.ServiceRegistrar, srv ProfileServiceSer
 }
 
 func _ProfileService_CreateOwnProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateProfilrRequest)
+	in := new(CreateProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -214,7 +246,7 @@ func _ProfileService_CreateOwnProfile_Handler(srv interface{}, ctx context.Conte
 		FullMethod: ProfileService_CreateOwnProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProfileServiceServer).CreateOwnProfile(ctx, req.(*CreateProfilrRequest))
+		return srv.(ProfileServiceServer).CreateOwnProfile(ctx, req.(*CreateProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -237,20 +269,56 @@ func _ProfileService_GetOwnProfile_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProfileService_GetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetProfileRequest)
+func _ProfileService_GetProfileById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProfileByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProfileServiceServer).GetProfile(ctx, in)
+		return srv.(ProfileServiceServer).GetProfileById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ProfileService_GetProfile_FullMethodName,
+		FullMethod: ProfileService_GetProfileById_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProfileServiceServer).GetProfile(ctx, req.(*GetProfileRequest))
+		return srv.(ProfileServiceServer).GetProfileById(ctx, req.(*GetProfileByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProfileService_GetProfileByUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProfileByUsernameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).GetProfileByUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfileService_GetProfileByUsername_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).GetProfileByUsername(ctx, req.(*GetProfileByUsernameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProfileService_SearchProfilesByUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchProfilesByUsernameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfileServiceServer).SearchProfilesByUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfileService_SearchProfilesByUsername_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfileServiceServer).SearchProfilesByUsername(ctx, req.(*SearchProfilesByUsernameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -361,8 +429,16 @@ var ProfileService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProfileService_GetOwnProfile_Handler,
 		},
 		{
-			MethodName: "GetProfile",
-			Handler:    _ProfileService_GetProfile_Handler,
+			MethodName: "GetProfileById",
+			Handler:    _ProfileService_GetProfileById_Handler,
+		},
+		{
+			MethodName: "GetProfileByUsername",
+			Handler:    _ProfileService_GetProfileByUsername_Handler,
+		},
+		{
+			MethodName: "SearchProfilesByUsername",
+			Handler:    _ProfileService_SearchProfilesByUsername_Handler,
 		},
 		{
 			MethodName: "UpdateOwnProfile",
