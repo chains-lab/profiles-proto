@@ -1,0 +1,99 @@
+syntax = "proto3";
+package profile;
+
+option go_package = "github.com/chains-lab/profiles-proto/gen/go/svc;svc";
+
+import "google/protobuf/empty.proto";
+
+service ProfileService {
+  rpc CreateOwnProfile (CreateProfilrRequest) returns (Profile);
+  rpc GetOwnProfile   (google.protobuf.Empty) returns (Profile);
+
+  rpc GetProfile (GetProfileRequest) returns (Profile);
+  rpc UpdateOwnProfile (UpdateOwnProfileRequest) returns (Profile);
+  rpc UpdateOwnUsername (UpdateOwnUsernameRequest) returns (Profile);
+
+  // Admin panel
+  rpc ResetProfileByAdmin (ResetProfileByAdminRequest) returns (Profile);
+  rpc ResetUsernameByAdmin (ResetUsernameByAdminRequest) returns (Profile);
+  rpc UpdateOfficialByAdmin (UpdateOfficialByAdminRequest) returns (Profile);
+}
+
+// REQUESTS
+message CreateProfilrRequest {
+  string username = 1;
+  optional string pseudonym = 2;
+  optional string description = 3;
+  optional string avatar = 4;
+  optional string sex = 5;
+  optional string birth_date = 6; // Format: YYYY-MM-DD
+}
+
+message GetProfileRequest {
+  oneof identifier {
+    string user_id  = 1;
+    string username = 2;
+  }
+}
+
+message SearchProfileRequest {
+  string query = 1;
+  int32 limit = 2;
+  int32 offset = 3;
+}
+
+message UpdateOwnProfileRequest {
+  optional string pseudonym = 1;
+  optional string description = 2;
+  optional string avatar = 3;
+  optional string sex = 4;
+  optional string birth_date = 5; // Format: YYYY-MM-DD
+}
+
+message UpdateOwnUsernameRequest {
+  string username = 1;
+}
+
+message GetCabinetByAdminRequest {
+  string user_id = 1;
+}
+
+message GetProfileByAdminRequest {
+  string user_id = 1;
+}
+
+message ResetProfileByAdminRequest {
+  string user_id = 1;
+  optional bool   pseudonym = 2;
+  optional bool   description = 3;
+  optional bool   avatar = 4;
+}
+
+message UpdateOfficialByAdminRequest {
+  string user_id = 1;
+  bool official = 2;
+}
+
+message ResetUsernameByAdminRequest {
+  string user_id = 1;
+  string username = 2;
+}
+
+// RESPONSES
+
+message Profile {
+  string user_id = 1;
+  string username = 2;
+  optional string pseudonym = 3;
+  optional string description = 4;
+  optional string avatar = 5;
+  bool official = 6;
+  optional string sex = 7;
+  optional string birth_date = 8; // Format: YYYY-MM-DD
+  string updated_at = 9;
+  string created_at = 10;
+}
+
+message ProfileList {
+  repeated Profile profiles = 1;
+}
