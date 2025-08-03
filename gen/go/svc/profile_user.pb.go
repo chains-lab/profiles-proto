@@ -4,7 +4,7 @@
 // 	protoc        v3.21.12
 // source: profile_user.proto
 
-package profile
+package svc
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -418,7 +418,7 @@ const file_profile_user_proto_rawDesc = "" +
 	"\n" +
 	"GetProfile\x12\x1a.profile.GetProfileRequest\x1a\x10.profile.Profile\x12F\n" +
 	"\x10UpdateOwnProfile\x12 .profile.UpdateOwnProfileRequest\x1a\x10.profile.Profile\x12H\n" +
-	"\x11UpdateOwnUsername\x12!.profile.UpdateOwnUsernameRequest\x1a\x10.profile.ProfileB@Z>github.com/chains-lab/proto-storage/gen/go/svc/profile;profileb\x06proto3"
+	"\x11UpdateOwnUsername\x12!.profile.UpdateOwnUsernameRequest\x1a\x10.profile.ProfileB4Z2github.com/chains-lab/proto-storage/gen/go/svc;svcb\x06proto3"
 
 var (
 	file_profile_user_proto_rawDescOnce sync.Once

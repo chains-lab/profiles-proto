@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: profile_admin.proto
 
-package profile
+package svc
 
 import (
 	context "context"

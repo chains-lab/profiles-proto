@@ -4,7 +4,7 @@
 // 	protoc        v3.21.12
 // source: profile_structs.proto
 
-package profile
+package svc
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -208,7 +208,7 @@ const file_profile_structs_proto_rawDesc = "" +
 	"\x04_sexB\r\n" +
 	"\v_birth_date\";\n" +
 	"\vProfileList\x12,\n" +
-	"\bprofiles\x18\x01 \x03(\v2\x10.profile.ProfileR\bprofilesB@Z>github.com/chains-lab/proto-storage/gen/go/svc/profile;profileb\x06proto3"
+	"\bprofiles\x18\x01 \x03(\v2\x10.profile.ProfileR\bprofilesB4Z2github.com/chains-lab/proto-storage/gen/go/svc;svcb\x06proto3"
 
 var (
 	file_profile_structs_proto_rawDescOnce sync.Once

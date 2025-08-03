@@ -4,7 +4,7 @@
 // 	protoc        v3.21.12
 // source: profile_admin.proto
 
-package profile
+package svc
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -309,7 +309,7 @@ const file_profile_admin_proto_rawDesc = "" +
 	"\fAdminService\x12L\n" +
 	"\x13ResetProfileByAdmin\x12#.profile.ResetProfileByAdminRequest\x1a\x10.profile.Profile\x12N\n" +
 	"\x14ResetUsernameByAdmin\x12$.profile.ResetUsernameByAdminRequest\x1a\x10.profile.Profile\x12P\n" +
-	"\x15UpdateOfficialByAdmin\x12%.profile.UpdateOfficialByAdminRequest\x1a\x10.profile.ProfileB@Z>github.com/chains-lab/proto-storage/gen/go/svc/profile;profileb\x06proto3"
+	"\x15UpdateOfficialByAdmin\x12%.profile.UpdateOfficialByAdminRequest\x1a\x10.profile.ProfileB4Z2github.com/chains-lab/proto-storage/gen/go/svc;svcb\x06proto3"
 
 var (
 	file_profile_admin_proto_rawDescOnce sync.Once
