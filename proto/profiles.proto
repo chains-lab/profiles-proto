@@ -6,21 +6,21 @@ option go_package = "github.com/chains-lab/profiles-proto/gen/go/svc;svc";
 import "google/protobuf/empty.proto";
 import "common.proto";
 
-service ProfileService {
-  rpc CreateOwnProfile (CreateProfileRequest) returns (ProfileModel);
-  rpc GetOwnProfile   (google.protobuf.Empty) returns (ProfileModel);
+service Profiles {
+  rpc CreateOwnProfile (CreateProfileRequest) returns (Profile);
+  rpc GetOwnProfile   (google.protobuf.Empty) returns (Profile);
 
-  rpc GetProfileById (GetProfileByIdRequest) returns (ProfileModel);
-  rpc GetProfileByUsername (GetProfileByUsernameRequest) returns (ProfileModel);
-  rpc SearchProfilesByUsername (SearchProfilesByUsernameRequest) returns (ProfileModelList);
+  rpc GetProfileById (GetProfileByIdRequest) returns (Profile);
+  rpc GetProfileByUsername (GetProfileByUsernameRequest) returns (Profile);
+  rpc SearchProfilesByUsername (SearchProfilesByUsernameRequest) returns (ProfilesList);
 
-  rpc UpdateOwnProfile (UpdateOwnProfileRequest) returns (ProfileModel);
-  rpc UpdateOwnUsername (UpdateOwnUsernameRequest) returns (ProfileModel);
+  rpc UpdateOwnProfile (UpdateOwnProfileRequest) returns (Profile);
+  rpc UpdateOwnUsername (UpdateOwnUsernameRequest) returns (Profile);
 
   // Admin panel
-  rpc ResetProfileByAdmin (ResetProfileByAdminRequest) returns (ProfileModel);
-  rpc ResetUsernameByAdmin (ResetUsernameByAdminRequest) returns (ProfileModel);
-  rpc UpdateOfficialByAdmin (UpdateOfficialByAdminRequest) returns (ProfileModel);
+  rpc ResetProfileByAdmin (ResetProfileByAdminRequest) returns (Profile);
+  rpc ResetUsernameByAdmin (ResetUsernameByAdminRequest) returns (Profile);
+  rpc UpdateOfficialByAdmin (UpdateOfficialByAdminRequest) returns (Profile);
 }
 
 // REQUESTS
@@ -85,7 +85,7 @@ message ResetUsernameByAdminRequest {
 
 // RESPONSES
 
-message ProfileModel {
+message Profile {
   string user_id = 1;
   string username = 2;
   optional string pseudonym = 3;
@@ -98,7 +98,7 @@ message ProfileModel {
   string created_at = 10;
 }
 
-message ProfileModelList {
-  repeated ProfileModel profiles = 1;
+message ProfilesList {
+  repeated Profile profiles = 1;
   PaginationResponse pagination = 2;
 }

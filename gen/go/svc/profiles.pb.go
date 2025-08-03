@@ -627,7 +627,7 @@ func (x *ResetUsernameByAdminRequest) GetUsername() string {
 	return ""
 }
 
-type ProfileModel struct {
+type Profile struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
@@ -643,20 +643,20 @@ type ProfileModel struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProfileModel) Reset() {
-	*x = ProfileModel{}
+func (x *Profile) Reset() {
+	*x = Profile{}
 	mi := &file_profiles_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProfileModel) String() string {
+func (x *Profile) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProfileModel) ProtoMessage() {}
+func (*Profile) ProtoMessage() {}
 
-func (x *ProfileModel) ProtoReflect() protoreflect.Message {
+func (x *Profile) ProtoReflect() protoreflect.Message {
 	mi := &file_profiles_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -668,103 +668,103 @@ func (x *ProfileModel) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProfileModel.ProtoReflect.Descriptor instead.
-func (*ProfileModel) Descriptor() ([]byte, []int) {
+// Deprecated: Use Profile.ProtoReflect.Descriptor instead.
+func (*Profile) Descriptor() ([]byte, []int) {
 	return file_profiles_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *ProfileModel) GetUserId() string {
+func (x *Profile) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *ProfileModel) GetUsername() string {
+func (x *Profile) GetUsername() string {
 	if x != nil {
 		return x.Username
 	}
 	return ""
 }
 
-func (x *ProfileModel) GetPseudonym() string {
+func (x *Profile) GetPseudonym() string {
 	if x != nil && x.Pseudonym != nil {
 		return *x.Pseudonym
 	}
 	return ""
 }
 
-func (x *ProfileModel) GetDescription() string {
+func (x *Profile) GetDescription() string {
 	if x != nil && x.Description != nil {
 		return *x.Description
 	}
 	return ""
 }
 
-func (x *ProfileModel) GetAvatar() string {
+func (x *Profile) GetAvatar() string {
 	if x != nil && x.Avatar != nil {
 		return *x.Avatar
 	}
 	return ""
 }
 
-func (x *ProfileModel) GetOfficial() bool {
+func (x *Profile) GetOfficial() bool {
 	if x != nil {
 		return x.Official
 	}
 	return false
 }
 
-func (x *ProfileModel) GetSex() string {
+func (x *Profile) GetSex() string {
 	if x != nil && x.Sex != nil {
 		return *x.Sex
 	}
 	return ""
 }
 
-func (x *ProfileModel) GetBirthDate() string {
+func (x *Profile) GetBirthDate() string {
 	if x != nil && x.BirthDate != nil {
 		return *x.BirthDate
 	}
 	return ""
 }
 
-func (x *ProfileModel) GetUpdatedAt() string {
+func (x *Profile) GetUpdatedAt() string {
 	if x != nil {
 		return x.UpdatedAt
 	}
 	return ""
 }
 
-func (x *ProfileModel) GetCreatedAt() string {
+func (x *Profile) GetCreatedAt() string {
 	if x != nil {
 		return x.CreatedAt
 	}
 	return ""
 }
 
-type ProfileModelList struct {
+type ProfilesList struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Profiles      []*ProfileModel        `protobuf:"bytes,1,rep,name=profiles,proto3" json:"profiles,omitempty"`
+	Profiles      []*Profile             `protobuf:"bytes,1,rep,name=profiles,proto3" json:"profiles,omitempty"`
 	Pagination    *PaginationResponse    `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProfileModelList) Reset() {
-	*x = ProfileModelList{}
+func (x *ProfilesList) Reset() {
+	*x = ProfilesList{}
 	mi := &file_profiles_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProfileModelList) String() string {
+func (x *ProfilesList) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProfileModelList) ProtoMessage() {}
+func (*ProfilesList) ProtoMessage() {}
 
-func (x *ProfileModelList) ProtoReflect() protoreflect.Message {
+func (x *ProfilesList) ProtoReflect() protoreflect.Message {
 	mi := &file_profiles_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -776,19 +776,19 @@ func (x *ProfileModelList) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProfileModelList.ProtoReflect.Descriptor instead.
-func (*ProfileModelList) Descriptor() ([]byte, []int) {
+// Deprecated: Use ProfilesList.ProtoReflect.Descriptor instead.
+func (*ProfilesList) Descriptor() ([]byte, []int) {
 	return file_profiles_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *ProfileModelList) GetProfiles() []*ProfileModel {
+func (x *ProfilesList) GetProfiles() []*Profile {
 	if x != nil {
 		return x.Profiles
 	}
 	return nil
 }
 
-func (x *ProfileModelList) GetPagination() *PaginationResponse {
+func (x *ProfilesList) GetPagination() *PaginationResponse {
 	if x != nil {
 		return x.Pagination
 	}
@@ -856,8 +856,8 @@ const file_profiles_proto_rawDesc = "" +
 	"\bofficial\x18\x02 \x01(\bR\bofficial\"R\n" +
 	"\x1bResetUsernameByAdminRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
-	"\busername\x18\x02 \x01(\tR\busername\"\xff\x02\n" +
-	"\fProfileModel\x12\x17\n" +
+	"\busername\x18\x02 \x01(\tR\busername\"\xfa\x02\n" +
+	"\aProfile\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12!\n" +
 	"\tpseudonym\x18\x03 \x01(\tH\x00R\tpseudonym\x88\x01\x01\x12%\n" +
@@ -877,23 +877,23 @@ const file_profiles_proto_rawDesc = "" +
 	"\f_descriptionB\t\n" +
 	"\a_avatarB\x06\n" +
 	"\x04_sexB\r\n" +
-	"\v_birth_date\"\x82\x01\n" +
-	"\x10ProfileModelList\x121\n" +
-	"\bprofiles\x18\x01 \x03(\v2\x15.profile.ProfileModelR\bprofiles\x12;\n" +
+	"\v_birth_date\"y\n" +
+	"\fProfilesList\x12,\n" +
+	"\bprofiles\x18\x01 \x03(\v2\x10.profile.ProfileR\bprofiles\x12;\n" +
 	"\n" +
 	"pagination\x18\x02 \x01(\v2\x1b.profile.PaginationResponseR\n" +
-	"pagination2\xb4\x06\n" +
-	"\x0eProfileService\x12H\n" +
-	"\x10CreateOwnProfile\x12\x1d.profile.CreateProfileRequest\x1a\x15.profile.ProfileModel\x12>\n" +
-	"\rGetOwnProfile\x12\x16.google.protobuf.Empty\x1a\x15.profile.ProfileModel\x12G\n" +
-	"\x0eGetProfileById\x12\x1e.profile.GetProfileByIdRequest\x1a\x15.profile.ProfileModel\x12S\n" +
-	"\x14GetProfileByUsername\x12$.profile.GetProfileByUsernameRequest\x1a\x15.profile.ProfileModel\x12_\n" +
-	"\x18SearchProfilesByUsername\x12(.profile.SearchProfilesByUsernameRequest\x1a\x19.profile.ProfileModelList\x12K\n" +
-	"\x10UpdateOwnProfile\x12 .profile.UpdateOwnProfileRequest\x1a\x15.profile.ProfileModel\x12M\n" +
-	"\x11UpdateOwnUsername\x12!.profile.UpdateOwnUsernameRequest\x1a\x15.profile.ProfileModel\x12Q\n" +
-	"\x13ResetProfileByAdmin\x12#.profile.ResetProfileByAdminRequest\x1a\x15.profile.ProfileModel\x12S\n" +
-	"\x14ResetUsernameByAdmin\x12$.profile.ResetUsernameByAdminRequest\x1a\x15.profile.ProfileModel\x12U\n" +
-	"\x15UpdateOfficialByAdmin\x12%.profile.UpdateOfficialByAdminRequest\x1a\x15.profile.ProfileModelB5Z3github.com/chains-lab/profiles-proto/gen/go/svc;svcb\x06proto3"
+	"pagination2\xfd\x05\n" +
+	"\bProfiles\x12C\n" +
+	"\x10CreateOwnProfile\x12\x1d.profile.CreateProfileRequest\x1a\x10.profile.Profile\x129\n" +
+	"\rGetOwnProfile\x12\x16.google.protobuf.Empty\x1a\x10.profile.Profile\x12B\n" +
+	"\x0eGetProfileById\x12\x1e.profile.GetProfileByIdRequest\x1a\x10.profile.Profile\x12N\n" +
+	"\x14GetProfileByUsername\x12$.profile.GetProfileByUsernameRequest\x1a\x10.profile.Profile\x12[\n" +
+	"\x18SearchProfilesByUsername\x12(.profile.SearchProfilesByUsernameRequest\x1a\x15.profile.ProfilesList\x12F\n" +
+	"\x10UpdateOwnProfile\x12 .profile.UpdateOwnProfileRequest\x1a\x10.profile.Profile\x12H\n" +
+	"\x11UpdateOwnUsername\x12!.profile.UpdateOwnUsernameRequest\x1a\x10.profile.Profile\x12L\n" +
+	"\x13ResetProfileByAdmin\x12#.profile.ResetProfileByAdminRequest\x1a\x10.profile.Profile\x12N\n" +
+	"\x14ResetUsernameByAdmin\x12$.profile.ResetUsernameByAdminRequest\x1a\x10.profile.Profile\x12P\n" +
+	"\x15UpdateOfficialByAdmin\x12%.profile.UpdateOfficialByAdminRequest\x1a\x10.profile.ProfileB5Z3github.com/chains-lab/profiles-proto/gen/go/svc;svcb\x06proto3"
 
 var (
 	file_profiles_proto_rawDescOnce sync.Once
@@ -920,36 +920,36 @@ var file_profiles_proto_goTypes = []any{
 	(*ResetProfileByAdminRequest)(nil),      // 8: profile.ResetProfileByAdminRequest
 	(*UpdateOfficialByAdminRequest)(nil),    // 9: profile.UpdateOfficialByAdminRequest
 	(*ResetUsernameByAdminRequest)(nil),     // 10: profile.ResetUsernameByAdminRequest
-	(*ProfileModel)(nil),                    // 11: profile.ProfileModel
-	(*ProfileModelList)(nil),                // 12: profile.ProfileModelList
+	(*Profile)(nil),                         // 11: profile.Profile
+	(*ProfilesList)(nil),                    // 12: profile.ProfilesList
 	(*PaginationRequest)(nil),               // 13: profile.PaginationRequest
 	(*PaginationResponse)(nil),              // 14: profile.PaginationResponse
 	(*emptypb.Empty)(nil),                   // 15: google.protobuf.Empty
 }
 var file_profiles_proto_depIdxs = []int32{
 	13, // 0: profile.SearchProfilesByUsernameRequest.pagination:type_name -> profile.PaginationRequest
-	11, // 1: profile.ProfileModelList.profiles:type_name -> profile.ProfileModel
-	14, // 2: profile.ProfileModelList.pagination:type_name -> profile.PaginationResponse
-	0,  // 3: profile.ProfileService.CreateOwnProfile:input_type -> profile.CreateProfileRequest
-	15, // 4: profile.ProfileService.GetOwnProfile:input_type -> google.protobuf.Empty
-	1,  // 5: profile.ProfileService.GetProfileById:input_type -> profile.GetProfileByIdRequest
-	2,  // 6: profile.ProfileService.GetProfileByUsername:input_type -> profile.GetProfileByUsernameRequest
-	3,  // 7: profile.ProfileService.SearchProfilesByUsername:input_type -> profile.SearchProfilesByUsernameRequest
-	4,  // 8: profile.ProfileService.UpdateOwnProfile:input_type -> profile.UpdateOwnProfileRequest
-	5,  // 9: profile.ProfileService.UpdateOwnUsername:input_type -> profile.UpdateOwnUsernameRequest
-	8,  // 10: profile.ProfileService.ResetProfileByAdmin:input_type -> profile.ResetProfileByAdminRequest
-	10, // 11: profile.ProfileService.ResetUsernameByAdmin:input_type -> profile.ResetUsernameByAdminRequest
-	9,  // 12: profile.ProfileService.UpdateOfficialByAdmin:input_type -> profile.UpdateOfficialByAdminRequest
-	11, // 13: profile.ProfileService.CreateOwnProfile:output_type -> profile.ProfileModel
-	11, // 14: profile.ProfileService.GetOwnProfile:output_type -> profile.ProfileModel
-	11, // 15: profile.ProfileService.GetProfileById:output_type -> profile.ProfileModel
-	11, // 16: profile.ProfileService.GetProfileByUsername:output_type -> profile.ProfileModel
-	12, // 17: profile.ProfileService.SearchProfilesByUsername:output_type -> profile.ProfileModelList
-	11, // 18: profile.ProfileService.UpdateOwnProfile:output_type -> profile.ProfileModel
-	11, // 19: profile.ProfileService.UpdateOwnUsername:output_type -> profile.ProfileModel
-	11, // 20: profile.ProfileService.ResetProfileByAdmin:output_type -> profile.ProfileModel
-	11, // 21: profile.ProfileService.ResetUsernameByAdmin:output_type -> profile.ProfileModel
-	11, // 22: profile.ProfileService.UpdateOfficialByAdmin:output_type -> profile.ProfileModel
+	11, // 1: profile.ProfilesList.profiles:type_name -> profile.Profile
+	14, // 2: profile.ProfilesList.pagination:type_name -> profile.PaginationResponse
+	0,  // 3: profile.Profiles.CreateOwnProfile:input_type -> profile.CreateProfileRequest
+	15, // 4: profile.Profiles.GetOwnProfile:input_type -> google.protobuf.Empty
+	1,  // 5: profile.Profiles.GetProfileById:input_type -> profile.GetProfileByIdRequest
+	2,  // 6: profile.Profiles.GetProfileByUsername:input_type -> profile.GetProfileByUsernameRequest
+	3,  // 7: profile.Profiles.SearchProfilesByUsername:input_type -> profile.SearchProfilesByUsernameRequest
+	4,  // 8: profile.Profiles.UpdateOwnProfile:input_type -> profile.UpdateOwnProfileRequest
+	5,  // 9: profile.Profiles.UpdateOwnUsername:input_type -> profile.UpdateOwnUsernameRequest
+	8,  // 10: profile.Profiles.ResetProfileByAdmin:input_type -> profile.ResetProfileByAdminRequest
+	10, // 11: profile.Profiles.ResetUsernameByAdmin:input_type -> profile.ResetUsernameByAdminRequest
+	9,  // 12: profile.Profiles.UpdateOfficialByAdmin:input_type -> profile.UpdateOfficialByAdminRequest
+	11, // 13: profile.Profiles.CreateOwnProfile:output_type -> profile.Profile
+	11, // 14: profile.Profiles.GetOwnProfile:output_type -> profile.Profile
+	11, // 15: profile.Profiles.GetProfileById:output_type -> profile.Profile
+	11, // 16: profile.Profiles.GetProfileByUsername:output_type -> profile.Profile
+	12, // 17: profile.Profiles.SearchProfilesByUsername:output_type -> profile.ProfilesList
+	11, // 18: profile.Profiles.UpdateOwnProfile:output_type -> profile.Profile
+	11, // 19: profile.Profiles.UpdateOwnUsername:output_type -> profile.Profile
+	11, // 20: profile.Profiles.ResetProfileByAdmin:output_type -> profile.Profile
+	11, // 21: profile.Profiles.ResetUsernameByAdmin:output_type -> profile.Profile
+	11, // 22: profile.Profiles.UpdateOfficialByAdmin:output_type -> profile.Profile
 	13, // [13:23] is the sub-list for method output_type
 	3,  // [3:13] is the sub-list for method input_type
 	3,  // [3:3] is the sub-list for extension type_name
