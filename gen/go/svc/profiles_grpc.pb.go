@@ -36,17 +36,17 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProfileServiceClient interface {
-	CreateOwnProfile(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*Profile, error)
-	GetOwnProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Profile, error)
-	GetProfileById(ctx context.Context, in *GetProfileByIdRequest, opts ...grpc.CallOption) (*Profile, error)
-	GetProfileByUsername(ctx context.Context, in *GetProfileByUsernameRequest, opts ...grpc.CallOption) (*Profile, error)
-	SearchProfilesByUsername(ctx context.Context, in *SearchProfilesByUsernameRequest, opts ...grpc.CallOption) (*ProfileList, error)
-	UpdateOwnProfile(ctx context.Context, in *UpdateOwnProfileRequest, opts ...grpc.CallOption) (*Profile, error)
-	UpdateOwnUsername(ctx context.Context, in *UpdateOwnUsernameRequest, opts ...grpc.CallOption) (*Profile, error)
+	CreateOwnProfile(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*ProfileModel, error)
+	GetOwnProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ProfileModel, error)
+	GetProfileById(ctx context.Context, in *GetProfileByIdRequest, opts ...grpc.CallOption) (*ProfileModel, error)
+	GetProfileByUsername(ctx context.Context, in *GetProfileByUsernameRequest, opts ...grpc.CallOption) (*ProfileModel, error)
+	SearchProfilesByUsername(ctx context.Context, in *SearchProfilesByUsernameRequest, opts ...grpc.CallOption) (*ProfileModelList, error)
+	UpdateOwnProfile(ctx context.Context, in *UpdateOwnProfileRequest, opts ...grpc.CallOption) (*ProfileModel, error)
+	UpdateOwnUsername(ctx context.Context, in *UpdateOwnUsernameRequest, opts ...grpc.CallOption) (*ProfileModel, error)
 	// Admin panel
-	ResetProfileByAdmin(ctx context.Context, in *ResetProfileByAdminRequest, opts ...grpc.CallOption) (*Profile, error)
-	ResetUsernameByAdmin(ctx context.Context, in *ResetUsernameByAdminRequest, opts ...grpc.CallOption) (*Profile, error)
-	UpdateOfficialByAdmin(ctx context.Context, in *UpdateOfficialByAdminRequest, opts ...grpc.CallOption) (*Profile, error)
+	ResetProfileByAdmin(ctx context.Context, in *ResetProfileByAdminRequest, opts ...grpc.CallOption) (*ProfileModel, error)
+	ResetUsernameByAdmin(ctx context.Context, in *ResetUsernameByAdminRequest, opts ...grpc.CallOption) (*ProfileModel, error)
+	UpdateOfficialByAdmin(ctx context.Context, in *UpdateOfficialByAdminRequest, opts ...grpc.CallOption) (*ProfileModel, error)
 }
 
 type profileServiceClient struct {
@@ -57,9 +57,9 @@ func NewProfileServiceClient(cc grpc.ClientConnInterface) ProfileServiceClient {
 	return &profileServiceClient{cc}
 }
 
-func (c *profileServiceClient) CreateOwnProfile(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) CreateOwnProfile(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*ProfileModel, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Profile)
+	out := new(ProfileModel)
 	err := c.cc.Invoke(ctx, ProfileService_CreateOwnProfile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -67,9 +67,9 @@ func (c *profileServiceClient) CreateOwnProfile(ctx context.Context, in *CreateP
 	return out, nil
 }
 
-func (c *profileServiceClient) GetOwnProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) GetOwnProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ProfileModel, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Profile)
+	out := new(ProfileModel)
 	err := c.cc.Invoke(ctx, ProfileService_GetOwnProfile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -77,9 +77,9 @@ func (c *profileServiceClient) GetOwnProfile(ctx context.Context, in *emptypb.Em
 	return out, nil
 }
 
-func (c *profileServiceClient) GetProfileById(ctx context.Context, in *GetProfileByIdRequest, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) GetProfileById(ctx context.Context, in *GetProfileByIdRequest, opts ...grpc.CallOption) (*ProfileModel, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Profile)
+	out := new(ProfileModel)
 	err := c.cc.Invoke(ctx, ProfileService_GetProfileById_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -87,9 +87,9 @@ func (c *profileServiceClient) GetProfileById(ctx context.Context, in *GetProfil
 	return out, nil
 }
 
-func (c *profileServiceClient) GetProfileByUsername(ctx context.Context, in *GetProfileByUsernameRequest, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) GetProfileByUsername(ctx context.Context, in *GetProfileByUsernameRequest, opts ...grpc.CallOption) (*ProfileModel, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Profile)
+	out := new(ProfileModel)
 	err := c.cc.Invoke(ctx, ProfileService_GetProfileByUsername_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -97,9 +97,9 @@ func (c *profileServiceClient) GetProfileByUsername(ctx context.Context, in *Get
 	return out, nil
 }
 
-func (c *profileServiceClient) SearchProfilesByUsername(ctx context.Context, in *SearchProfilesByUsernameRequest, opts ...grpc.CallOption) (*ProfileList, error) {
+func (c *profileServiceClient) SearchProfilesByUsername(ctx context.Context, in *SearchProfilesByUsernameRequest, opts ...grpc.CallOption) (*ProfileModelList, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ProfileList)
+	out := new(ProfileModelList)
 	err := c.cc.Invoke(ctx, ProfileService_SearchProfilesByUsername_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -107,9 +107,9 @@ func (c *profileServiceClient) SearchProfilesByUsername(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *profileServiceClient) UpdateOwnProfile(ctx context.Context, in *UpdateOwnProfileRequest, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) UpdateOwnProfile(ctx context.Context, in *UpdateOwnProfileRequest, opts ...grpc.CallOption) (*ProfileModel, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Profile)
+	out := new(ProfileModel)
 	err := c.cc.Invoke(ctx, ProfileService_UpdateOwnProfile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -117,9 +117,9 @@ func (c *profileServiceClient) UpdateOwnProfile(ctx context.Context, in *UpdateO
 	return out, nil
 }
 
-func (c *profileServiceClient) UpdateOwnUsername(ctx context.Context, in *UpdateOwnUsernameRequest, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) UpdateOwnUsername(ctx context.Context, in *UpdateOwnUsernameRequest, opts ...grpc.CallOption) (*ProfileModel, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Profile)
+	out := new(ProfileModel)
 	err := c.cc.Invoke(ctx, ProfileService_UpdateOwnUsername_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -127,9 +127,9 @@ func (c *profileServiceClient) UpdateOwnUsername(ctx context.Context, in *Update
 	return out, nil
 }
 
-func (c *profileServiceClient) ResetProfileByAdmin(ctx context.Context, in *ResetProfileByAdminRequest, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) ResetProfileByAdmin(ctx context.Context, in *ResetProfileByAdminRequest, opts ...grpc.CallOption) (*ProfileModel, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Profile)
+	out := new(ProfileModel)
 	err := c.cc.Invoke(ctx, ProfileService_ResetProfileByAdmin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -137,9 +137,9 @@ func (c *profileServiceClient) ResetProfileByAdmin(ctx context.Context, in *Rese
 	return out, nil
 }
 
-func (c *profileServiceClient) ResetUsernameByAdmin(ctx context.Context, in *ResetUsernameByAdminRequest, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) ResetUsernameByAdmin(ctx context.Context, in *ResetUsernameByAdminRequest, opts ...grpc.CallOption) (*ProfileModel, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Profile)
+	out := new(ProfileModel)
 	err := c.cc.Invoke(ctx, ProfileService_ResetUsernameByAdmin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -147,9 +147,9 @@ func (c *profileServiceClient) ResetUsernameByAdmin(ctx context.Context, in *Res
 	return out, nil
 }
 
-func (c *profileServiceClient) UpdateOfficialByAdmin(ctx context.Context, in *UpdateOfficialByAdminRequest, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profileServiceClient) UpdateOfficialByAdmin(ctx context.Context, in *UpdateOfficialByAdminRequest, opts ...grpc.CallOption) (*ProfileModel, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Profile)
+	out := new(ProfileModel)
 	err := c.cc.Invoke(ctx, ProfileService_UpdateOfficialByAdmin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -161,17 +161,17 @@ func (c *profileServiceClient) UpdateOfficialByAdmin(ctx context.Context, in *Up
 // All implementations must embed UnimplementedProfileServiceServer
 // for forward compatibility.
 type ProfileServiceServer interface {
-	CreateOwnProfile(context.Context, *CreateProfileRequest) (*Profile, error)
-	GetOwnProfile(context.Context, *emptypb.Empty) (*Profile, error)
-	GetProfileById(context.Context, *GetProfileByIdRequest) (*Profile, error)
-	GetProfileByUsername(context.Context, *GetProfileByUsernameRequest) (*Profile, error)
-	SearchProfilesByUsername(context.Context, *SearchProfilesByUsernameRequest) (*ProfileList, error)
-	UpdateOwnProfile(context.Context, *UpdateOwnProfileRequest) (*Profile, error)
-	UpdateOwnUsername(context.Context, *UpdateOwnUsernameRequest) (*Profile, error)
+	CreateOwnProfile(context.Context, *CreateProfileRequest) (*ProfileModel, error)
+	GetOwnProfile(context.Context, *emptypb.Empty) (*ProfileModel, error)
+	GetProfileById(context.Context, *GetProfileByIdRequest) (*ProfileModel, error)
+	GetProfileByUsername(context.Context, *GetProfileByUsernameRequest) (*ProfileModel, error)
+	SearchProfilesByUsername(context.Context, *SearchProfilesByUsernameRequest) (*ProfileModelList, error)
+	UpdateOwnProfile(context.Context, *UpdateOwnProfileRequest) (*ProfileModel, error)
+	UpdateOwnUsername(context.Context, *UpdateOwnUsernameRequest) (*ProfileModel, error)
 	// Admin panel
-	ResetProfileByAdmin(context.Context, *ResetProfileByAdminRequest) (*Profile, error)
-	ResetUsernameByAdmin(context.Context, *ResetUsernameByAdminRequest) (*Profile, error)
-	UpdateOfficialByAdmin(context.Context, *UpdateOfficialByAdminRequest) (*Profile, error)
+	ResetProfileByAdmin(context.Context, *ResetProfileByAdminRequest) (*ProfileModel, error)
+	ResetUsernameByAdmin(context.Context, *ResetUsernameByAdminRequest) (*ProfileModel, error)
+	UpdateOfficialByAdmin(context.Context, *UpdateOfficialByAdminRequest) (*ProfileModel, error)
 	mustEmbedUnimplementedProfileServiceServer()
 }
 
@@ -182,34 +182,34 @@ type ProfileServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedProfileServiceServer struct{}
 
-func (UnimplementedProfileServiceServer) CreateOwnProfile(context.Context, *CreateProfileRequest) (*Profile, error) {
+func (UnimplementedProfileServiceServer) CreateOwnProfile(context.Context, *CreateProfileRequest) (*ProfileModel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOwnProfile not implemented")
 }
-func (UnimplementedProfileServiceServer) GetOwnProfile(context.Context, *emptypb.Empty) (*Profile, error) {
+func (UnimplementedProfileServiceServer) GetOwnProfile(context.Context, *emptypb.Empty) (*ProfileModel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOwnProfile not implemented")
 }
-func (UnimplementedProfileServiceServer) GetProfileById(context.Context, *GetProfileByIdRequest) (*Profile, error) {
+func (UnimplementedProfileServiceServer) GetProfileById(context.Context, *GetProfileByIdRequest) (*ProfileModel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProfileById not implemented")
 }
-func (UnimplementedProfileServiceServer) GetProfileByUsername(context.Context, *GetProfileByUsernameRequest) (*Profile, error) {
+func (UnimplementedProfileServiceServer) GetProfileByUsername(context.Context, *GetProfileByUsernameRequest) (*ProfileModel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProfileByUsername not implemented")
 }
-func (UnimplementedProfileServiceServer) SearchProfilesByUsername(context.Context, *SearchProfilesByUsernameRequest) (*ProfileList, error) {
+func (UnimplementedProfileServiceServer) SearchProfilesByUsername(context.Context, *SearchProfilesByUsernameRequest) (*ProfileModelList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchProfilesByUsername not implemented")
 }
-func (UnimplementedProfileServiceServer) UpdateOwnProfile(context.Context, *UpdateOwnProfileRequest) (*Profile, error) {
+func (UnimplementedProfileServiceServer) UpdateOwnProfile(context.Context, *UpdateOwnProfileRequest) (*ProfileModel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOwnProfile not implemented")
 }
-func (UnimplementedProfileServiceServer) UpdateOwnUsername(context.Context, *UpdateOwnUsernameRequest) (*Profile, error) {
+func (UnimplementedProfileServiceServer) UpdateOwnUsername(context.Context, *UpdateOwnUsernameRequest) (*ProfileModel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOwnUsername not implemented")
 }
-func (UnimplementedProfileServiceServer) ResetProfileByAdmin(context.Context, *ResetProfileByAdminRequest) (*Profile, error) {
+func (UnimplementedProfileServiceServer) ResetProfileByAdmin(context.Context, *ResetProfileByAdminRequest) (*ProfileModel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetProfileByAdmin not implemented")
 }
-func (UnimplementedProfileServiceServer) ResetUsernameByAdmin(context.Context, *ResetUsernameByAdminRequest) (*Profile, error) {
+func (UnimplementedProfileServiceServer) ResetUsernameByAdmin(context.Context, *ResetUsernameByAdminRequest) (*ProfileModel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetUsernameByAdmin not implemented")
 }
-func (UnimplementedProfileServiceServer) UpdateOfficialByAdmin(context.Context, *UpdateOfficialByAdminRequest) (*Profile, error) {
+func (UnimplementedProfileServiceServer) UpdateOfficialByAdmin(context.Context, *UpdateOfficialByAdminRequest) (*ProfileModel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOfficialByAdmin not implemented")
 }
 func (UnimplementedProfileServiceServer) mustEmbedUnimplementedProfileServiceServer() {}
