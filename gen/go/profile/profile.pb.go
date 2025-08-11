@@ -561,9 +561,9 @@ type ResetProfileByAdminRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Initiator     *userdata.UserData     `protobuf:"bytes,1,opt,name=initiator,proto3" json:"initiator,omitempty"`
 	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Pseudonym     *string                `protobuf:"bytes,3,opt,name=pseudonym,proto3,oneof" json:"pseudonym,omitempty"`
-	Description   *string                `protobuf:"bytes,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	Avatar        *string                `protobuf:"bytes,5,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
+	Pseudonym     *bool                  `protobuf:"varint,3,opt,name=pseudonym,proto3,oneof" json:"pseudonym,omitempty"`
+	Description   *bool                  `protobuf:"varint,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	Avatar        *bool                  `protobuf:"varint,5,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -612,25 +612,25 @@ func (x *ResetProfileByAdminRequest) GetUserId() string {
 	return ""
 }
 
-func (x *ResetProfileByAdminRequest) GetPseudonym() string {
+func (x *ResetProfileByAdminRequest) GetPseudonym() bool {
 	if x != nil && x.Pseudonym != nil {
 		return *x.Pseudonym
 	}
-	return ""
+	return false
 }
 
-func (x *ResetProfileByAdminRequest) GetDescription() string {
+func (x *ResetProfileByAdminRequest) GetDescription() bool {
 	if x != nil && x.Description != nil {
 		return *x.Description
 	}
-	return ""
+	return false
 }
 
-func (x *ResetProfileByAdminRequest) GetAvatar() string {
+func (x *ResetProfileByAdminRequest) GetAvatar() bool {
 	if x != nil && x.Avatar != nil {
 		return *x.Avatar
 	}
-	return ""
+	return false
 }
 
 type Profile struct {
@@ -860,9 +860,9 @@ const file_profile_profile_proto_rawDesc = "" +
 	"\x1aResetProfileByAdminRequest\x120\n" +
 	"\tinitiator\x18\x01 \x01(\v2\x12.userdata.UserDataR\tinitiator\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12!\n" +
-	"\tpseudonym\x18\x03 \x01(\tH\x00R\tpseudonym\x88\x01\x01\x12%\n" +
-	"\vdescription\x18\x04 \x01(\tH\x01R\vdescription\x88\x01\x01\x12\x1b\n" +
-	"\x06avatar\x18\x05 \x01(\tH\x02R\x06avatar\x88\x01\x01B\f\n" +
+	"\tpseudonym\x18\x03 \x01(\bH\x00R\tpseudonym\x88\x01\x01\x12%\n" +
+	"\vdescription\x18\x04 \x01(\bH\x01R\vdescription\x88\x01\x01\x12\x1b\n" +
+	"\x06avatar\x18\x05 \x01(\bH\x02R\x06avatar\x88\x01\x01B\f\n" +
 	"\n" +
 	"_pseudonymB\x0e\n" +
 	"\f_descriptionB\t\n" +
