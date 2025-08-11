@@ -1,7 +1,7 @@
 syntax = "proto3";
 package profile;
 
-option go_package = "github.com/chains-lab/profiles-proto/gen/go/svc;svc";
+option go_package = "github.com/chains-lab/profiles-proto/gen/go/profile;profile";
 
 import "google/protobuf/empty.proto";
 import "common/userdata/userdata.proto";
