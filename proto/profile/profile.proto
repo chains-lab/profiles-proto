@@ -35,7 +35,7 @@ message CreateProfileRequest {
   optional string birth_date = 7; // Format: YYYY-MM-DD
 }
 
-message GetOwnProfile {
+message GetOwnProfileRequest {
   userdata.UserData initiator = 1;
 }
 

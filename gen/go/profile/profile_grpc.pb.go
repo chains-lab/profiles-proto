@@ -11,7 +11,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -37,7 +36,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProfilesClient interface {
 	CreateOwnProfile(ctx context.Context, in *CreateProfileRequest, opts ...grpc.CallOption) (*Profile, error)
-	GetOwnProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Profile, error)
+	GetOwnProfile(ctx context.Context, in *GetOwnProfileRequest, opts ...grpc.CallOption) (*Profile, error)
 	GetProfileById(ctx context.Context, in *GetProfileByIdRequest, opts ...grpc.CallOption) (*Profile, error)
 	GetProfileByUsername(ctx context.Context, in *GetProfileByUsernameRequest, opts ...grpc.CallOption) (*Profile, error)
 	SearchProfilesByUsername(ctx context.Context, in *SearchProfilesByUsernameRequest, opts ...grpc.CallOption) (*ProfilesList, error)
@@ -67,7 +66,7 @@ func (c *profilesClient) CreateOwnProfile(ctx context.Context, in *CreateProfile
 	return out, nil
 }
 
-func (c *profilesClient) GetOwnProfile(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Profile, error) {
+func (c *profilesClient) GetOwnProfile(ctx context.Context, in *GetOwnProfileRequest, opts ...grpc.CallOption) (*Profile, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Profile)
 	err := c.cc.Invoke(ctx, Profiles_GetOwnProfile_FullMethodName, in, out, cOpts...)
@@ -162,7 +161,7 @@ func (c *profilesClient) UpdateOfficialByAdmin(ctx context.Context, in *UpdateOf
 // for forward compatibility.
 type ProfilesServer interface {
 	CreateOwnProfile(context.Context, *CreateProfileRequest) (*Profile, error)
-	GetOwnProfile(context.Context, *emptypb.Empty) (*Profile, error)
+	GetOwnProfile(context.Context, *GetOwnProfileRequest) (*Profile, error)
 	GetProfileById(context.Context, *GetProfileByIdRequest) (*Profile, error)
 	GetProfileByUsername(context.Context, *GetProfileByUsernameRequest) (*Profile, error)
 	SearchProfilesByUsername(context.Context, *SearchProfilesByUsernameRequest) (*ProfilesList, error)
@@ -185,7 +184,7 @@ type UnimplementedProfilesServer struct{}
 func (UnimplementedProfilesServer) CreateOwnProfile(context.Context, *CreateProfileRequest) (*Profile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOwnProfile not implemented")
 }
-func (UnimplementedProfilesServer) GetOwnProfile(context.Context, *emptypb.Empty) (*Profile, error) {
+func (UnimplementedProfilesServer) GetOwnProfile(context.Context, *GetOwnProfileRequest) (*Profile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOwnProfile not implemented")
 }
 func (UnimplementedProfilesServer) GetProfileById(context.Context, *GetProfileByIdRequest) (*Profile, error) {
@@ -252,7 +251,7 @@ func _Profiles_CreateOwnProfile_Handler(srv interface{}, ctx context.Context, de
 }
 
 func _Profiles_GetOwnProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(GetOwnProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -264,7 +263,7 @@ func _Profiles_GetOwnProfile_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: Profiles_GetOwnProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProfilesServer).GetOwnProfile(ctx, req.(*emptypb.Empty))
+		return srv.(ProfilesServer).GetOwnProfile(ctx, req.(*GetOwnProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
