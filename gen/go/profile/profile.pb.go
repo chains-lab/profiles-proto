@@ -708,7 +708,7 @@ func (x *Profile) GetCreatedAt() string {
 type ProfilesList struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Profiles      []*Profile             `protobuf:"bytes,1,rep,name=profiles,proto3" json:"profiles,omitempty"`
-	Pagination    *pagination.Request    `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	Pagination    *pagination.Response   `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -750,7 +750,7 @@ func (x *ProfilesList) GetProfiles() []*Profile {
 	return nil
 }
 
-func (x *ProfilesList) GetPagination() *pagination.Request {
+func (x *ProfilesList) GetPagination() *pagination.Response {
 	if x != nil {
 		return x.Pagination
 	}
@@ -841,11 +841,11 @@ const file_profile_profile_proto_rawDesc = "" +
 	"\f_descriptionB\t\n" +
 	"\a_avatarB\x06\n" +
 	"\x04_sexB\r\n" +
-	"\v_birth_date\"q\n" +
+	"\v_birth_date\"r\n" +
 	"\fProfilesList\x12,\n" +
-	"\bprofiles\x18\x01 \x03(\v2\x10.profile.ProfileR\bprofiles\x123\n" +
+	"\bprofiles\x18\x01 \x03(\v2\x10.profile.ProfileR\bprofiles\x124\n" +
 	"\n" +
-	"pagination\x18\x02 \x01(\v2\x13.pagination.RequestR\n" +
+	"pagination\x18\x02 \x01(\v2\x14.pagination.ResponseR\n" +
 	"pagination2\xfd\x05\n" +
 	"\bProfiles\x12C\n" +
 	"\x10CreateOwnProfile\x12\x1d.profile.CreateProfileRequest\x1a\x10.profile.Profile\x129\n" +
@@ -886,8 +886,7 @@ var file_profile_profile_proto_goTypes = []any{
 	(*ProfilesList)(nil),                    // 10: profile.ProfilesList
 	(*userdata.UserData)(nil),               // 11: userdata.UserData
 	(*pagination.Response)(nil),             // 12: pagination.Response
-	(*pagination.Request)(nil),              // 13: pagination.Request
-	(*emptypb.Empty)(nil),                   // 14: google.protobuf.Empty
+	(*emptypb.Empty)(nil),                   // 13: google.protobuf.Empty
 }
 var file_profile_profile_proto_depIdxs = []int32{
 	11, // 0: profile.CreateProfileRequest.initiator:type_name -> userdata.UserData
@@ -898,9 +897,9 @@ var file_profile_profile_proto_depIdxs = []int32{
 	11, // 5: profile.ResetUsernameByAdminRequest.initiator:type_name -> userdata.UserData
 	11, // 6: profile.ResetProfileByAdminRequest.initiator:type_name -> userdata.UserData
 	9,  // 7: profile.ProfilesList.profiles:type_name -> profile.Profile
-	13, // 8: profile.ProfilesList.pagination:type_name -> pagination.Request
+	12, // 8: profile.ProfilesList.pagination:type_name -> pagination.Response
 	0,  // 9: profile.Profiles.CreateOwnProfile:input_type -> profile.CreateProfileRequest
-	14, // 10: profile.Profiles.GetOwnProfile:input_type -> google.protobuf.Empty
+	13, // 10: profile.Profiles.GetOwnProfile:input_type -> google.protobuf.Empty
 	1,  // 11: profile.Profiles.GetProfileById:input_type -> profile.GetProfileByIdRequest
 	2,  // 12: profile.Profiles.GetProfileByUsername:input_type -> profile.GetProfileByUsernameRequest
 	3,  // 13: profile.Profiles.SearchProfilesByUsername:input_type -> profile.SearchProfilesByUsernameRequest

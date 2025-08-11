@@ -9,7 +9,7 @@ import "common/pagination/pagination.proto";
 
 service Profiles {
   rpc CreateOwnProfile (CreateProfileRequest) returns (Profile);
-  rpc GetOwnProfile   (google.protobuf.Empty) returns (Profile);
+  rpc GetOwnProfile   (GetOwnProfileRequest) returns (Profile);
 
   rpc GetProfileById (GetProfileByIdRequest) returns (Profile);
   rpc GetProfileByUsername (GetProfileByUsernameRequest) returns (Profile);
@@ -33,6 +33,10 @@ message CreateProfileRequest {
   optional string avatar = 5;
   optional string sex = 6;
   optional string birth_date = 7; // Format: YYYY-MM-DD
+}
+
+message GetOwnProfile {
+  userdata.UserData initiator = 1;
 }
 
 message GetProfileByIdRequest {
@@ -99,5 +103,5 @@ message Profile {
 
 message ProfilesList {
   repeated Profile profiles = 1;
-  pagination.Request pagination = 2;
+  pagination.Response pagination = 2;
 }
