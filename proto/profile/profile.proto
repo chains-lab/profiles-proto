@@ -81,9 +81,9 @@ message ResetUsernameByAdminRequest {
 message ResetProfileByAdminRequest {
   userdata.UserData initiator = 1;
   string user_id = 2;
-  optional bool pseudonym = 3;
-  optional bool description = 4;
-  optional bool avatar = 5;
+  bool pseudonym = 3;
+  bool description = 4;
+  bool avatar = 5;
 }
 
 // RESPONSES

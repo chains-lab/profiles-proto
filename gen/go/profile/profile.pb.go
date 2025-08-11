@@ -561,9 +561,9 @@ type ResetProfileByAdminRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Initiator     *userdata.UserData     `protobuf:"bytes,1,opt,name=initiator,proto3" json:"initiator,omitempty"`
 	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Pseudonym     *bool                  `protobuf:"varint,3,opt,name=pseudonym,proto3,oneof" json:"pseudonym,omitempty"`
-	Description   *bool                  `protobuf:"varint,4,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	Avatar        *bool                  `protobuf:"varint,5,opt,name=avatar,proto3,oneof" json:"avatar,omitempty"`
+	Pseudonym     bool                   `protobuf:"varint,3,opt,name=pseudonym,proto3" json:"pseudonym,omitempty"`
+	Description   bool                   `protobuf:"varint,4,opt,name=description,proto3" json:"description,omitempty"`
+	Avatar        bool                   `protobuf:"varint,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -613,22 +613,22 @@ func (x *ResetProfileByAdminRequest) GetUserId() string {
 }
 
 func (x *ResetProfileByAdminRequest) GetPseudonym() bool {
-	if x != nil && x.Pseudonym != nil {
-		return *x.Pseudonym
+	if x != nil {
+		return x.Pseudonym
 	}
 	return false
 }
 
 func (x *ResetProfileByAdminRequest) GetDescription() bool {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		return x.Description
 	}
 	return false
 }
 
 func (x *ResetProfileByAdminRequest) GetAvatar() bool {
-	if x != nil && x.Avatar != nil {
-		return *x.Avatar
+	if x != nil {
+		return x.Avatar
 	}
 	return false
 }
@@ -856,17 +856,13 @@ const file_profile_profile_proto_rawDesc = "" +
 	"\x1bResetUsernameByAdminRequest\x120\n" +
 	"\tinitiator\x18\x01 \x01(\v2\x12.userdata.UserDataR\tinitiator\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1a\n" +
-	"\busername\x18\x03 \x01(\tR\busername\"\xf7\x01\n" +
+	"\busername\x18\x03 \x01(\tR\busername\"\xbf\x01\n" +
 	"\x1aResetProfileByAdminRequest\x120\n" +
 	"\tinitiator\x18\x01 \x01(\v2\x12.userdata.UserDataR\tinitiator\x12\x17\n" +
-	"\auser_id\x18\x02 \x01(\tR\x06userId\x12!\n" +
-	"\tpseudonym\x18\x03 \x01(\bH\x00R\tpseudonym\x88\x01\x01\x12%\n" +
-	"\vdescription\x18\x04 \x01(\bH\x01R\vdescription\x88\x01\x01\x12\x1b\n" +
-	"\x06avatar\x18\x05 \x01(\bH\x02R\x06avatar\x88\x01\x01B\f\n" +
-	"\n" +
-	"_pseudonymB\x0e\n" +
-	"\f_descriptionB\t\n" +
-	"\a_avatar\"\xfa\x02\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1c\n" +
+	"\tpseudonym\x18\x03 \x01(\bR\tpseudonym\x12 \n" +
+	"\vdescription\x18\x04 \x01(\bR\vdescription\x12\x16\n" +
+	"\x06avatar\x18\x05 \x01(\bR\x06avatar\"\xfa\x02\n" +
 	"\aProfile\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12!\n" +
@@ -979,7 +975,6 @@ func file_profile_profile_proto_init() {
 	}
 	file_profile_profile_proto_msgTypes[0].OneofWrappers = []any{}
 	file_profile_profile_proto_msgTypes[5].OneofWrappers = []any{}
-	file_profile_profile_proto_msgTypes[9].OneofWrappers = []any{}
 	file_profile_profile_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
