@@ -99,7 +99,7 @@ const file_common_userdata_userdata_proto_rawDesc = "" +
 	"\x04role\x18\x02 \x01(\tR\x04role\x12\x1d\n" +
 	"\n" +
 	"session_id\x18\x03 \x01(\tR\tsessionId\x12\x1a\n" +
-	"\bverified\x18\x04 \x01(\bR\bverifiedBAZ?github.com/chains-lab/sso-proto/gen/go/common/userdata;userdatab\x06proto3"
+	"\bverified\x18\x04 \x01(\bR\bverifiedBFZDgithub.com/chains-lab/profiles-proto/gen/go/common/userdata;userdatab\x06proto3"
 
 var (
 	file_common_userdata_userdata_proto_rawDescOnce sync.Once
