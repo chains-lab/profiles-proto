@@ -4,7 +4,8 @@ package profile;
 option go_package = "github.com/chains-lab/profiles-proto/gen/go/svc;svc";
 
 import "google/protobuf/empty.proto";
-import "common.proto";
+import "common/userdata/userdata.proto";
+import "common/pagination/pagination.proto";
 
 service Profiles {
   rpc CreateOwnProfile (CreateProfileRequest) returns (Profile);
@@ -25,12 +26,13 @@ service Profiles {
 
 // REQUESTS
 message CreateProfileRequest {
-  string username = 1;
-  optional string pseudonym = 2;
-  optional string description = 3;
-  optional string avatar = 4;
-  optional string sex = 5;
-  optional string birth_date = 6; // Format: YYYY-MM-DD
+  userdata.UserData initiator = 1;
+  string username = 2;
+  optional string pseudonym = 3;
+  optional string description = 4;
+  optional string avatar = 5;
+  optional string sex = 6;
+  optional string birth_date = 7; // Format: YYYY-MM-DD
 }
 
 message GetProfileByIdRequest {
@@ -43,44 +45,41 @@ message GetProfileByUsernameRequest {
 
 message SearchProfilesByUsernameRequest {
   string prompt = 1;
-  PaginationRequest pagination = 2;
+  pagination.Response pagination = 2;
 }
 
 message UpdateOwnProfileRequest {
-  optional string pseudonym = 1;
-  optional string description = 2;
-  optional string avatar = 3;
-  optional string sex = 4;
-  optional string birth_date = 5; // Format: YYYY-MM-DD
+  userdata.UserData initiator = 1;
+  optional string pseudonym = 2;
+  optional string description = 3;
+  optional string avatar = 4;
+  optional string sex = 5;
+  optional string birth_date = 6; // Format: YYYY-MM-DD
 }
 
 message UpdateOwnUsernameRequest {
-  string username = 1;
-}
-
-message GetCabinetByAdminRequest {
-  string user_id = 1;
-}
-
-message GetProfileByAdminRequest {
-  string user_id = 1;
-}
-
-message ResetProfileByAdminRequest {
-  string user_id = 1;
-  optional bool   pseudonym = 2;
-  optional bool   description = 3;
-  optional bool   avatar = 4;
+  userdata.UserData initiator = 1;
+  string username = 2;
 }
 
 message UpdateOfficialByAdminRequest {
-  string user_id = 1;
-  bool official = 2;
+  userdata.UserData initiator = 1;
+  string user_id = 2;
+  bool official = 3;
 }
 
 message ResetUsernameByAdminRequest {
-  string user_id = 1;
-  string username = 2;
+  userdata.UserData initiator = 1;
+  string user_id = 2;
+  string username = 3;
+}
+
+message ResetProfileByAdminRequest {
+  userdata.UserData initiator = 1;
+  string user_id = 2;
+  optional string pseudonym = 3;
+  optional string description = 4;
+  optional string avatar = 5;
 }
 
 // RESPONSES
@@ -100,5 +99,5 @@ message Profile {
 
 message ProfilesList {
   repeated Profile profiles = 1;
-  PaginationResponse pagination = 2;
+  pagination.Request pagination = 2;
 }
