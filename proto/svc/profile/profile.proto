@@ -17,6 +17,10 @@ service ProfilesService {
 
   rpc UpdateOwnProfile (UpdateOwnProfileRequest) returns (Profile);
   rpc UpdateOwnUsername (UpdateOwnUsernameRequest) returns (Profile);
+
+  rpc ResetProfile (ResetProfileRequest) returns (profile.Profile);
+  rpc ResetUsername (ResetUsernameRequest) returns (profile.Profile);
+  rpc UpdateOfficial (UpdateOfficialRequest) returns (profile.Profile);
 }
 
 // REQUESTS
@@ -60,6 +64,27 @@ message UpdateOwnUsernameRequest {
   userdata.UserData initiator = 1;
   string username = 2;
 }
+
+message UpdateOfficialRequest {
+  userdata.UserData initiator = 1;
+  string user_id = 2;
+  bool official = 3;
+}
+
+message ResetUsernameRequest {
+  userdata.UserData initiator = 1;
+  string user_id = 2;
+  string username = 3;
+}
+
+message ResetProfileRequest {
+  userdata.UserData initiator = 1;
+  string user_id = 2;
+  bool pseudonym = 3;
+  bool description = 4;
+  bool avatar = 5;
+}
+
 // RESPONSES
 
 message Profile {

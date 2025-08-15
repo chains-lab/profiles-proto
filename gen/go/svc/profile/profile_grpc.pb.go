@@ -26,6 +26,9 @@ const (
 	ProfilesService_SearchProfilesByUsername_FullMethodName = "/profile.ProfilesService/SearchProfilesByUsername"
 	ProfilesService_UpdateOwnProfile_FullMethodName         = "/profile.ProfilesService/UpdateOwnProfile"
 	ProfilesService_UpdateOwnUsername_FullMethodName        = "/profile.ProfilesService/UpdateOwnUsername"
+	ProfilesService_ResetProfile_FullMethodName             = "/profile.ProfilesService/ResetProfile"
+	ProfilesService_ResetUsername_FullMethodName            = "/profile.ProfilesService/ResetUsername"
+	ProfilesService_UpdateOfficial_FullMethodName           = "/profile.ProfilesService/UpdateOfficial"
 )
 
 // ProfilesServiceClient is the client API for ProfilesService service.
@@ -39,6 +42,9 @@ type ProfilesServiceClient interface {
 	SearchProfilesByUsername(ctx context.Context, in *SearchProfilesByUsernameRequest, opts ...grpc.CallOption) (*ProfilesList, error)
 	UpdateOwnProfile(ctx context.Context, in *UpdateOwnProfileRequest, opts ...grpc.CallOption) (*Profile, error)
 	UpdateOwnUsername(ctx context.Context, in *UpdateOwnUsernameRequest, opts ...grpc.CallOption) (*Profile, error)
+	ResetProfile(ctx context.Context, in *ResetProfileRequest, opts ...grpc.CallOption) (*Profile, error)
+	ResetUsername(ctx context.Context, in *ResetUsernameRequest, opts ...grpc.CallOption) (*Profile, error)
+	UpdateOfficial(ctx context.Context, in *UpdateOfficialRequest, opts ...grpc.CallOption) (*Profile, error)
 }
 
 type profilesServiceClient struct {
@@ -119,6 +125,36 @@ func (c *profilesServiceClient) UpdateOwnUsername(ctx context.Context, in *Updat
 	return out, nil
 }
 
+func (c *profilesServiceClient) ResetProfile(ctx context.Context, in *ResetProfileRequest, opts ...grpc.CallOption) (*Profile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Profile)
+	err := c.cc.Invoke(ctx, ProfilesService_ResetProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profilesServiceClient) ResetUsername(ctx context.Context, in *ResetUsernameRequest, opts ...grpc.CallOption) (*Profile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Profile)
+	err := c.cc.Invoke(ctx, ProfilesService_ResetUsername_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *profilesServiceClient) UpdateOfficial(ctx context.Context, in *UpdateOfficialRequest, opts ...grpc.CallOption) (*Profile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Profile)
+	err := c.cc.Invoke(ctx, ProfilesService_UpdateOfficial_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProfilesServiceServer is the server API for ProfilesService service.
 // All implementations must embed UnimplementedProfilesServiceServer
 // for forward compatibility.
@@ -130,6 +166,9 @@ type ProfilesServiceServer interface {
 	SearchProfilesByUsername(context.Context, *SearchProfilesByUsernameRequest) (*ProfilesList, error)
 	UpdateOwnProfile(context.Context, *UpdateOwnProfileRequest) (*Profile, error)
 	UpdateOwnUsername(context.Context, *UpdateOwnUsernameRequest) (*Profile, error)
+	ResetProfile(context.Context, *ResetProfileRequest) (*Profile, error)
+	ResetUsername(context.Context, *ResetUsernameRequest) (*Profile, error)
+	UpdateOfficial(context.Context, *UpdateOfficialRequest) (*Profile, error)
 	mustEmbedUnimplementedProfilesServiceServer()
 }
 
@@ -160,6 +199,15 @@ func (UnimplementedProfilesServiceServer) UpdateOwnProfile(context.Context, *Upd
 }
 func (UnimplementedProfilesServiceServer) UpdateOwnUsername(context.Context, *UpdateOwnUsernameRequest) (*Profile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOwnUsername not implemented")
+}
+func (UnimplementedProfilesServiceServer) ResetProfile(context.Context, *ResetProfileRequest) (*Profile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetProfile not implemented")
+}
+func (UnimplementedProfilesServiceServer) ResetUsername(context.Context, *ResetUsernameRequest) (*Profile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetUsername not implemented")
+}
+func (UnimplementedProfilesServiceServer) UpdateOfficial(context.Context, *UpdateOfficialRequest) (*Profile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOfficial not implemented")
 }
 func (UnimplementedProfilesServiceServer) mustEmbedUnimplementedProfilesServiceServer() {}
 func (UnimplementedProfilesServiceServer) testEmbeddedByValue()                         {}
@@ -308,6 +356,60 @@ func _ProfilesService_UpdateOwnUsername_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProfilesService_ResetProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfilesServiceServer).ResetProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfilesService_ResetProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfilesServiceServer).ResetProfile(ctx, req.(*ResetProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProfilesService_ResetUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetUsernameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfilesServiceServer).ResetUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfilesService_ResetUsername_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfilesServiceServer).ResetUsername(ctx, req.(*ResetUsernameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ProfilesService_UpdateOfficial_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOfficialRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProfilesServiceServer).UpdateOfficial(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProfilesService_UpdateOfficial_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProfilesServiceServer).UpdateOfficial(ctx, req.(*UpdateOfficialRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProfilesService_ServiceDesc is the grpc.ServiceDesc for ProfilesService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -342,6 +444,18 @@ var ProfilesService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOwnUsername",
 			Handler:    _ProfilesService_UpdateOwnUsername_Handler,
+		},
+		{
+			MethodName: "ResetProfile",
+			Handler:    _ProfilesService_ResetProfile_Handler,
+		},
+		{
+			MethodName: "ResetUsername",
+			Handler:    _ProfilesService_ResetUsername_Handler,
+		},
+		{
+			MethodName: "UpdateOfficial",
+			Handler:    _ProfilesService_UpdateOfficial_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
